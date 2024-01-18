@@ -18,6 +18,9 @@ jobs:
 
     - name: Generate key
       run: php artisan key:generate
+
+    - name: Migrate
+      run: php artisan migrate
    
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
