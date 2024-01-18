@@ -15,15 +15,9 @@ jobs:
    
     - name: Run Clear 
       run: php artisan clear-compiled
-
-    - name: Run Optimize 
-        run: php artisan optimize
       
     - name: Run Migrate 
         run: php artisan migrate --force
-
-    - name: Run Up
-        run: php artisan up
 
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
