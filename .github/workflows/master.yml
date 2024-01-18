@@ -12,12 +12,7 @@ jobs:
  
     - name: Run composer install
       run: composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
-
-    - name: Prepare Laravel Application
-        run: |
-          cp .env.ci .env
-          php artisan key:generate
-    
+   
     - name: Run Clear 
       run: php artisan clear-compiled
 
