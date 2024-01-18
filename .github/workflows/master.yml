@@ -18,3 +18,4 @@ jobs:
         password: ${{ secrets.FTP_PASS_MAIN }}
         protocol: ftps
         port: 21
+        script: "cd /var/www/html && sh ./.scripts/deploy.sh"
