@@ -10,6 +10,33 @@ jobs:
     - name: 🚚 Get latest code
       uses: actions/checkout@v3
 
+    - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv
+          coverage: none
+ 
+    - name: Run composer install
+      run: composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+
+    - name: Prepare Laravel Application
+        run: |
+          cp .env.ci .env
+          php artisan key:generate
+    
+    - name: Run Clear 
+      run: php artisan clear-compiled
+
+    - name: Run Optimize 
+        run: php artisan optimize
+      
+    - name: Run Migrate 
+        run: php artisan migrate --force
+
+    - name: Run Up
+        run: php artisan up
+
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
@@ -18,4 +45,3 @@ jobs:
         password: ${{ secrets.FTP_PASS_MAIN }}
         protocol: ftps
         port: 21
-        script: "cd /var/www/html && sh ./.scripts/deploy.sh"
