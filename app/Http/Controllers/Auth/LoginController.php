@@ -6,21 +6,21 @@ use App\Exceptions\InvalidAutenticationException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\User\UserResource;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function login(LoginRequest $request)
+    /**
+     * @param LoginRequest $request      
+     * @return UserResource
+     * @throws InvalidAutenticationException
+     */
+    public function __invoke(LoginRequest $request): UserResource
     {
         $input = $request->validated();
-        if (!Auth::attempt($input)) {
+        if (!auth()->attempt($input)) {
             throw new InvalidAutenticationException();
         }
-
-        $request->session()->regenerate();
-
+        request()->session()->regenerate();
         return new UserResource(auth()->user());
     }
 }
-

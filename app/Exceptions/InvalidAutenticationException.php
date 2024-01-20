@@ -2,16 +2,12 @@
 
 namespace App\Exceptions;
 
+use App\Http\Traits\RenderToJson;
 use Exception;
 
 class InvalidAutenticationException extends Exception
 {
+    use RenderToJson;
     protected $message = 'Credentials invalid';
-    public function render()
-    {
-        return response()->json([
-            'error' => class_basename($this),
-            'message' => $this->getMessage()
-        ], status: 401);
-    }
+    protected $code = 400;
 }
