@@ -7,26 +7,26 @@ jobs:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v3
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
 
-    - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
- 
-    - name: Run composer install
-      run: composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+      - name: Copy .env
+        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
-    - name: Generate key
-      run: php artisan key:generate
+      - name: Run composer install
+        run: composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 
-    - name: Migrate
-      run: php artisan migrate
-   
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      with:
-        server: ${{ secrets.FTP_HOST_MAIN }}
-        username: ${{ secrets.FTP_USER_MAIN }}
-        password: ${{ secrets.FTP_PASS_MAIN }}
-        protocol: ftps
-        port: 21
+      - name: Generate key
+        run: php artisan key:generate
+
+      - name: Scripts
+        run: ./.scripts/script.sh
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_HOST_MAIN }}
+          username: ${{ secrets.FTP_USER_MAIN }}
+          password: ${{ secrets.FTP_PASS_MAIN }}
+          protocol: ftps
+          port: 21
