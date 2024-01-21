@@ -19,8 +19,8 @@ jobs:
       - name: Generate key
         run: php artisan key:generate
 
-      - name: Scripts
-        run: ./.scripts/script.sh
+      # - name: Scripts
+      #   run: ./.scripts/script.sh
 
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
