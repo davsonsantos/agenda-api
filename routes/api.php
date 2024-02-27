@@ -6,7 +6,7 @@ use App\Http\Controllers\User\MeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('web')->group(function () {
+Route::group(['middleware' => ['web']], function () {
     Route::post('login', LoginController::class);
     Route::post('register', RegisterController::class);
 });
