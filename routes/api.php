@@ -6,10 +6,8 @@ use App\Http\Controllers\User\MeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => ['web']], function () {
-    Route::post('login', LoginController::class);
-    Route::post('register', RegisterController::class);
-});
+Route::post('login', LoginController::class);
+Route::post('register', RegisterController::class);
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('me', [MeController::class, 'show']);

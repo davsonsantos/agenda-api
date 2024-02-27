@@ -10,11 +10,9 @@ use App\Http\Resources\UserResource;
 class LoginController extends Controller
 {
     /**
-     * Executes the function with the given LoginRequest and returns a UserResource.
-     *
-     * @param LoginRequest $request The request to be validated
-     * @throws InvalidAuthenticationException if authentication attempt fails
+     * @param LoginRequest $request
      * @return UserResource
+     * @throws InvalidAuthenticationException
      */
     public function __invoke(LoginRequest $request): UserResource
     {
@@ -25,6 +23,7 @@ class LoginController extends Controller
         }
 
         request()->session()->regenerate();
+
         return new UserResource(auth()->user());
     }
 }
