@@ -22,11 +22,13 @@
                         <tbody>
                             <tr>
                                 <td style="font-family: Helvetica, sans-serif; font-size: 16px; vertical-align: top; border-radius: 4px; text-align: center; background-color: #0867ec;"
-                                    valign="top" align="center" bgcolor="#0867ec"> <a href="http://htmlemail.io"
+                                    valign="top" align="center" bgcolor="#0867ec">
+                                    <a href="{{ config('app.portal_url') }}/verificar-email?token={{ $user->token }}"
                                         target="_blank"
                                         style="border: solid 2px #0867ec; border-radius: 4px; box-sizing: border-box; cursor: pointer; display: inline-block; font-size: 16px; font-weight: bold; margin: 0; padding: 12px 24px; text-decoration: none; text-transform: capitalize; background-color: #0867ec; border-color: #0867ec; color: #ffffff;">
                                         Verificar conta
-                                    </a> </td>
+                                    </a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
