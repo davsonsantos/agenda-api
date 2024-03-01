@@ -10,6 +10,6 @@ Route::post('login', LoginController::class);
 Route::post('register', RegisterController::class);
 Route::post('verify-email', VerifyEmailController::class);
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('me', [MeController::class, 'show']);
 });
