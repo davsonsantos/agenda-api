@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Exceptions\InvalidEmailVerifyTokenException;
 use App\Exceptions\InvalidTokenException;
 use App\Exceptions\UserAlreadyVerifyException;
 use App\Http\Controllers\Controller;
@@ -21,7 +22,7 @@ class VerifyEmailController extends Controller
         $input = $request->validated();
         $user = User::where('token', $input['token'])->first();
         if (!$user) {
-            throw new InvalidTokenException();
+            throw new InvalidEmailVerifyTokenException();
         }
 
         if ($user->email_verified_at) {
