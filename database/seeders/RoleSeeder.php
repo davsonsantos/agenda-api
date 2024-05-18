@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Team;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -15,13 +17,11 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        // $role = Role::create(['name' => 'gerente']);
-        // $permission = Permission::create(['name' => 'delete user']);
+        $admin = Role::create(['name' => 'admin']);
+        Role::create(['name' => 'atendente']);
+        Role::create(['name' => 'cliente']);
 
-        // $role->givePermissionTo($permission);
-        // $permission->assignRole($role);
-
-        $user = User::inRandomOrder()->first();
-        $user->assignRole('gerente');
+        $permissionDeleteUser = Permission::create(['name' => 'delete_user']);
+        $admin->givePermissionTo($permissionDeleteUser);
     }
 }
